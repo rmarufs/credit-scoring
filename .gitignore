@@ -1,0 +1,25 @@
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+.env
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Ноутбуки
+.ipynb_checkpoints/
+
+# IDE и ОС
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
