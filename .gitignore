@@ -1,6 +1,6 @@
 data/raw/*
-data/processed/*
 !data/raw/.gitkeep
+data/processed/*
 !data/processed/.gitkeep
 
 .env
@@ -23,3 +23,11 @@ __pycache__/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Покрытие тестов
+.coverage
+htmlcov/
+
+# Сборка
+build/
+dist/
