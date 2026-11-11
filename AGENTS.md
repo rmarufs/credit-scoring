@@ -5,7 +5,8 @@
 ## Стек
 - Python 3.12
 - FastAPI, Uvicorn, Pydantic v2
-- scikit-learn (Pipeline), XGBoost или LightGBM (уточнить после baseline)
+- scikit-learn (Pipeline)
+- Catboost
 - pandas, numpy, joblib
 - pytest, httpx (тесты API)
 - Docker, docker compose
