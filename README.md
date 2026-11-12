@@ -1,6 +1,6 @@
 # Credit Scoring
 
-![CI](https://github.com/rmarufs/credit-scoring/actions/workflows/ci.yml/badge.svg)
+   ![CI](https://github.com/rmarufs/credit-scoring/actions/workflows/ci.yml/badge.svg?branch=main)
 
 Сервис кредитного скоринга для оценки вероятности дефолта заёмщика по анкетным и кредитным параметрам заявки. В состав проекта входят пайплайн очистки данных и обучения модели градиентного бустинга (`CatBoost`), сохранённые артефакты модели и метаданных, HTTP-сервис на базе `FastAPI` и конфигурация контейнеризации `Docker`.
 
@@ -11,7 +11,7 @@
 1. Клонировать репозиторий и перейти в каталог проекта:
 
 ```bash
-git clone <URL_РЕПОЗИТОРИЯ>
+git clone 'https://github.com/rmarufs/credit-scoring'
 cd credit-scoring
 ```
 
