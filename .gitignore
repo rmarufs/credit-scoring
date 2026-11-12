@@ -6,6 +6,7 @@ data/processed/*
 .env
 .venv/
 venv/
+catboost_info/
 
 # Python
 __pycache__/
