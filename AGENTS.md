@@ -17,7 +17,7 @@
 ## Структура
 - `src/` обучение: загрузка и очистка данных, признаки, train, evaluate
 - `app/` API: только загрузка готовой модели и предсказания
-- `models/` артефакты: `model.joblib`, `model_meta.json`
+- `models/` артефакты: `model.pkl`, `metadata.json`
 - `data/` данные, в git не попадают
 - `notebooks/` EDA и baseline
 - `docs/` документация проекта
