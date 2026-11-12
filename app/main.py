@@ -5,6 +5,7 @@ import logging
 import time
 
 from fastapi import FastAPI, Request, Response
+from fastapi.responses import RedirectResponse
 
 from app.config import Settings, settings as default_settings
 from app.model_loader import lifespan
@@ -24,12 +25,19 @@ def create_app(custom_settings: Settings | None = None) -> FastAPI:
         title="Credit Scoring API",
         description=(
             "Сервис оценки вероятности дефолта заёмщика на базе модели CatBoost. "
-            "Принимает анкетные и кредитные параметры заявки и возвращает вероятность дефолта и решение."
+            "Принимает анкетные и кредитные параметры заявки и возвращает вероятность дефолта и решение. "
+            "Сервис демонстрационный, реальные персональные данные вводить не нужно. "
+            "Бесплатный сервер засыпает после простоя, первый запрос может занять около минуты."
         ),
         version="1.0.0",
         lifespan=lifespan,
     )
     application.state.settings = custom_settings or default_settings
+
+    @application.get("/", include_in_schema=False)
+    def redirect_to_docs() -> RedirectResponse:
+        """Перенаправляет корневой запрос на интерактивную документацию Swagger UI."""
+        return RedirectResponse(url="/docs")
 
     @application.middleware("http")
     async def log_request_timing(

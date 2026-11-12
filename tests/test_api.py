@@ -13,6 +13,7 @@ if str(ROOT) not in sys.path:
 
 from app.config import Settings
 from app.main import app, create_app
+from app.schemas import PredictRequest
 
 
 def _valid_payload(**overrides: Any) -> dict[str, Any]:
@@ -138,3 +139,41 @@ def test_predict_without_model_returns_503(tmp_path: Path) -> None:
 
         predict_resp = client.post("/predict", json=_valid_payload())
         assert predict_resp.status_code == 503
+
+
+def test_root_redirects_to_docs() -> None:
+    """Проверяет, что GET / возвращает 3xx редирект на /docs и не попадает в схему OpenAPI."""
+    with TestClient(app) as client:
+        response = client.get("/", follow_redirects=False)
+        assert 300 <= response.status_code < 400
+        assert response.headers["location"] == "/docs"
+
+        openapi_schema = client.get("/openapi.json").json()
+        assert "/" not in openapi_schema.get("paths", {})
+
+
+def test_openapi_schema_examples_are_valid_and_return_200() -> None:
+    """Проверяет, что примеры из схемы PredictRequest валидны и возвращают 200 на /predict."""
+    with TestClient(app) as client:
+        openapi_resp = client.get("/openapi.json")
+        assert openapi_resp.status_code == 200
+        openapi_data = openapi_resp.json()
+
+        schema_def = openapi_data["components"]["schemas"]["PredictRequest"]
+        schema_examples = schema_def.get("examples") or (
+            [schema_def["example"]] if "example" in schema_def else []
+        )
+        assert len(schema_examples) >= 1
+
+        decisions: list[str] = []
+        for example_payload in schema_examples:
+            validated = PredictRequest.model_validate(example_payload)
+            assert validated.person_age >= 20
+
+            resp = client.post("/predict", json=example_payload)
+            assert resp.status_code == 200
+            decisions.append(resp.json()["decision"])
+
+        assert decisions[0] == "approve"
+        if len(decisions) > 1:
+            assert decisions[1] == "decline"

@@ -21,7 +21,35 @@ DecisionLiteral = Literal["approve", "decline"]
 class PredictRequest(BaseModel):
     """Входные данные кредитной заявки для расчёта вероятности дефолта."""
 
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(
+        extra="forbid",
+        json_schema_extra={
+            "examples": [
+                {
+                    "person_age": 28,
+                    "person_income": 65000,
+                    "person_home_ownership": "MORTGAGE",
+                    "person_emp_length": 5,
+                    "loan_intent": "EDUCATION",
+                    "loan_grade": "B",
+                    "loan_amnt": 8000,
+                    "cb_person_default_on_file": "N",
+                    "cb_person_cred_hist_length": 6,
+                },
+                {
+                    "person_age": 24,
+                    "person_income": 28000,
+                    "person_home_ownership": "RENT",
+                    "person_emp_length": 1,
+                    "loan_intent": "DEBTCONSOLIDATION",
+                    "loan_grade": "E",
+                    "loan_amnt": 16000,
+                    "cb_person_default_on_file": "Y",
+                    "cb_person_cred_hist_length": 3,
+                },
+            ]
+        },
+    )
 
     person_age: int = Field(
         ...,
