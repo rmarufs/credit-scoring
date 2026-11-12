@@ -1,0 +1,80 @@
+{
+  "model_name": "CatBoostClassifier",
+  "trained_at": "2026-11-12T06:03:07Z",
+  "train_size": 25918,
+  "test_size": 6480,
+  "input_features": [
+    "person_age",
+    "person_income",
+    "person_home_ownership",
+    "person_emp_length",
+    "loan_intent",
+    "loan_grade",
+    "loan_amnt",
+    "cb_person_default_on_file",
+    "cb_person_cred_hist_length"
+  ],
+  "dropped_columns": [
+    "loan_int_rate"
+  ],
+  "features": [
+    "person_age",
+    "person_income",
+    "person_home_ownership",
+    "person_emp_length",
+    "loan_intent",
+    "loan_grade",
+    "loan_amnt",
+    "loan_percent_income",
+    "cb_person_default_on_file",
+    "cb_person_cred_hist_length"
+  ],
+  "cat_features": [
+    "person_home_ownership",
+    "loan_intent",
+    "loan_grade",
+    "cb_person_default_on_file"
+  ],
+  "best_params": {
+    "depth": 4,
+    "learning_rate": 0.15248263275183993,
+    "l2_leaf_reg": 4.743226441772372,
+    "random_strength": 2.1115768380392548,
+    "bagging_temperature": 2.6397323786149323,
+    "border_count": 254,
+    "iterations": 662
+  },
+  "random_seed": 42,
+  "use_calibration": false,
+  "threshold": 0.16,
+  "cost_assumption": {
+    "c": 5,
+    "fp_cost": 1.0,
+    "fn_cost": 5.0
+  },
+  "test_metrics": {
+    "ROC-AUC": 0.9486,
+    "PR-AUC": 0.9115,
+    "KS": 0.7789,
+    "Gini": 0.8972,
+    "Brier": 0.0488,
+    "log_loss": 0.1791
+  },
+  "test_threshold_metrics": {
+    "threshold": 0.16,
+    "tn": 4599,
+    "fp": 463,
+    "fn": 201,
+    "tp": 1217,
+    "approval_rate": 0.7407,
+    "recall": 0.8583,
+    "precision": 0.7244,
+    "bad_rate": 0.0419
+  },
+  "versions": {
+    "python": "3.12.6",
+    "catboost": "1.2.10",
+    "pandas": "3.1.1",
+    "numpy": "2.5.4"
+  }
+}
